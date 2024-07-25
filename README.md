@@ -10,7 +10,7 @@ A to-do web application based on Express.js.
 - [x] API: Update to-do item (PATCH /todos)
 - [x] API: Delete to-do item (DELETE /todos)
 
-- [] Front-end
+- [ ] Front-end (HTMX or Svelte)
 
 ## Dependencies
 
