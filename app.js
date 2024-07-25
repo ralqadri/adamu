@@ -1,5 +1,6 @@
 const sqlite3 = require("sqlite3").verbose(); // verbose to produce long stack traces
 const { createDecipheriv } = require("crypto");
+const e = require("express");
 const express = require("express");
 const http = require("http");
 
@@ -45,7 +46,7 @@ app.post("/todos", (req, res) => {
 	const params = [data.name, data.completed ? 1 : 0];
 	const query = "INSERT INTO todos (name, completed) VALUES (?, ?)";
 
-	db.run(query, params, function (err) {
+	db.run(query, params, (err) => {
 		if (err) {
 			return res.status(500).json({ error: err.message }); // return error message if query fails
 		}
@@ -55,5 +56,23 @@ app.post("/todos", (req, res) => {
 			completed: data.completed ? 1 : 0,
 			created_at: new Date().toISOString(),
 		}); // else return the new todo item that has been inserted into db
+	});
+});
+
+app.get("/todos", (req, res) => {
+	const query = "SELECT * FROM todos";
+	const params = [];
+	// db.run(query, function (err, rows) {
+	// 	if (err) {
+	// 		return res.status(500).json({ error: err.message }); // return error message if query fails
+	// 	}
+	// 	res.status(200).json(rows); // else returns all todo items in db
+	// });
+
+	db.all(query, params, (err, rows) => {
+		if (err) {
+			return res.status(500).json({ error: err.message }); // return error message if query fails
+		}
+		res.status(200).json(rows); // else returns all todo items in db
 	});
 });
