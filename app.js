@@ -62,17 +62,61 @@ app.post("/todos", (req, res) => {
 app.get("/todos", (req, res) => {
 	const query = "SELECT * FROM todos";
 	const params = [];
-	// db.run(query, function (err, rows) {
-	// 	if (err) {
-	// 		return res.status(500).json({ error: err.message }); // return error message if query fails
-	// 	}
-	// 	res.status(200).json(rows); // else returns all todo items in db
-	// });
 
 	db.all(query, params, (err, rows) => {
 		if (err) {
 			return res.status(500).json({ error: err.message }); // return error message if query fails
 		}
 		res.status(200).json(rows); // else returns all todo items in db
+	});
+});
+
+app.get("/todos/:id", (req, res) => {
+	const query = "SELECT * FROM todos WHERE id = ?";
+	const params = [req.params.id]; // grab the :id parameter from the URL
+
+	db.get(query, params, (err, row) => {
+		if (err) {
+			return res.status(500).json({ error: err.message }); // return error message if query fails
+		}
+		if (!row) {
+			res.status(404).json({ error: `Todo not found!` });
+		}
+		res.status(200).json(row);
+	});
+});
+
+app.patch("/todos/", (req, res) => {
+	const data = req.body;
+	const query = "UPDATE todos SET name = ?, completed = ? WHERE id = ?";
+	const params = [data.name, data.completed ? 1 : 0, data.id];
+
+	const updatedItem = {
+		id: data.id,
+		name: data.name,
+		completed: data.completed ? 1 : 0,
+	};
+
+	db.run(query, params, (err) => {
+		if (err) {
+			return res.status(500).json({ error: err.message }); // return error message if query fails
+		}
+		res
+			.status(200)
+			.json({ message: "Todo item updated successfully!", data: updatedItem });
+	});
+});
+
+app.delete("/todos/:id", (req, res) => {
+	const query = "DELETE FROM todos WHERE id = ?";
+	const params = [req.params.id];
+
+	db.run(query, params, (err) => {
+		if (err) {
+			return res.status(500).json({ error: err.message }); // return error message if query fails
+		}
+		res.status(200).json({
+			message: "Todo item deleted successfully!",
+		});
 	});
 });
