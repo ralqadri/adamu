@@ -39,7 +39,7 @@ app.listen(port, () => {
 	console.log(`adamu is now listening on port ${port}`);
 });
 
-// API: create new todo item (POST /todos)
+// API: (POST, /todos) create new todo item
 app.post("/todos", (req, res) => {
 	const data = req.body;
 	const params = [data.name, data.completed ? 1 : 0];
@@ -47,14 +47,13 @@ app.post("/todos", (req, res) => {
 
 	db.run(query, params, function (err) {
 		if (err) {
-			return res.status(500).json({ error: err.message }); // return error code
+			return res.status(500).json({ error: err.message }); // return error message if query fails
 		}
-
 		res.status(201).json({
 			id: this.lastID,
 			name: data.name,
 			completed: data.completed ? 1 : 0,
 			created_at: new Date().toISOString(),
-		});
+		}); // else return the new todo item that has been inserted into db
 	});
 });
