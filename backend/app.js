@@ -1,9 +1,7 @@
 const sqlite3 = require("sqlite3").verbose(); // verbose to produce long stack traces
-const { createDecipheriv } = require("crypto");
-const e = require("express");
 const express = require("express");
-const { rmSync } = require("fs");
 const http = require("http");
+const cors = require("cors");
 
 const app = express();
 const server = http.createServer(app);
