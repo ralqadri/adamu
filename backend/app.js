@@ -1,9 +1,7 @@
 const sqlite3 = require("sqlite3").verbose(); // verbose to produce long stack traces
-const { createDecipheriv } = require("crypto");
-const e = require("express");
 const express = require("express");
-const { rmSync } = require("fs");
 const http = require("http");
+const cors = require("cors");
 
 const app = express();
 const server = http.createServer(app);
@@ -12,6 +10,7 @@ const db = new sqlite3.Database("todos.db"); // creates a .db file (persisting d
 const port = 3000;
 
 app.use(express.json()); // middleware to handle & parse JSON data
+app.use(cors()); // middleware to enable CORS for all routes
 
 db.serialize(() => {
 	db.run(
@@ -149,12 +148,10 @@ app.patch("/todos/completed/:id", (req, res) => {
 		if (err) {
 			return res.status(500).json({ error: err.message });
 		}
-		res
-			.status(500)
-			.json({
-				message: "Todo item completed status switched successfully!",
-				data: updatedItem,
-			});
+		res.status(500).json({
+			message: "Todo item completed status switched successfully!",
+			data: updatedItem,
+		});
 	});
 });
 
