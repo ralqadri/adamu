@@ -2,6 +2,7 @@ const sqlite3 = require("sqlite3").verbose(); // verbose to produce long stack t
 const { createDecipheriv } = require("crypto");
 const e = require("express");
 const express = require("express");
+const { rmSync } = require("fs");
 const http = require("http");
 
 const app = express();
@@ -59,6 +60,7 @@ app.post("/todos", (req, res) => {
 	});
 });
 
+// API: (GET, /todos) get all todo items
 app.get("/todos", (req, res) => {
 	const query = "SELECT * FROM todos";
 	const params = [];
@@ -71,6 +73,7 @@ app.get("/todos", (req, res) => {
 	});
 });
 
+// API: (GET, /todos/:id) get specific todo item from id
 app.get("/todos/:id", (req, res) => {
 	const query = "SELECT * FROM todos WHERE id = ?";
 	const params = [req.params.id]; // grab the :id parameter from the URL
@@ -86,7 +89,9 @@ app.get("/todos/:id", (req, res) => {
 	});
 });
 
-app.patch("/todos/", (req, res) => {
+// API: (PATCH, /todos/) change/update both name and completed status of a todo item
+app.patch("/todos", (req, res) => {
+	// this doesn't need :id parameter because of PATCH uses the request body
 	const data = req.body;
 	const query = "UPDATE todos SET name = ?, completed = ? WHERE id = ?";
 	const params = [data.name, data.completed ? 1 : 0, data.id];
@@ -104,6 +109,52 @@ app.patch("/todos/", (req, res) => {
 		res
 			.status(200)
 			.json({ message: "Todo item updated successfully!", data: updatedItem });
+	});
+});
+
+// API: (PATCH, /todos/name/:id/) change/update name of a todo item
+app.patch("/todos/name/:id", (req, res) => {
+	const data = req.body;
+	const query = "UPDATE todos SET name = ? WHERE id = ?";
+	const params = [data.name, req.params.id];
+
+	const updatedItem = {
+		id: req.params.id,
+		name: data.name,
+	};
+
+	db.run(query, params, (err) => {
+		if (err) {
+			return res.status(500).json({ error: err.message });
+		}
+		res.status(200).json({
+			message: "Todo item name changed successfully!",
+			data: updatedItem,
+		});
+	});
+});
+
+// API: (PATCH, /todos/completed/:id) switch/update completed status of a todo item
+app.patch("/todos/completed/:id", (req, res) => {
+	const data = req.body;
+	const query = "UPDATE todos SET completed = ? WHERE id = ?";
+	const params = [data.completed ? 1 : 0, req.params.id];
+
+	const updatedItem = {
+		id: req.params.id,
+		completed: data.completed ? 1 : 0,
+	};
+
+	db.run(query, params, (err) => {
+		if (err) {
+			return res.status(500).json({ error: err.message });
+		}
+		res
+			.status(500)
+			.json({
+				message: "Todo item completed status switched successfully!",
+				data: updatedItem,
+			});
 	});
 });
 
