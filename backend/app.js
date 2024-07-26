@@ -7,11 +7,15 @@ const app = express();
 const server = http.createServer(app);
 const db = new sqlite3.Database("todos.db"); // creates a .db file (persisting db)
 // const db = new sqlite3.Database(":memory:"); // creates an in-memory db (temp db)
-const port = 3000;
+const port = 57381;
 
 app.use(express.json()); // middleware to handle & parse JSON data
 app.use(cors());
 app.use(express.static("../frontend/public"));
+
+app.get("/", (req, res) => {
+	res.send("Hello World!");
+});
 
 db.serialize(() => {
 	db.run(
@@ -31,14 +35,6 @@ db.serialize(() => {
 			}
 		}
 	);
-});
-
-app.get("/", (req, res) => {
-	res.send("hello world!");
-});
-
-app.listen(port, () => {
-	console.log(`adamu is now listening on port ${port}`);
 });
 
 // API: (POST, /todos) create new todo item
@@ -168,4 +164,8 @@ app.delete("/todos/:id", (req, res) => {
 			message: "Todo item deleted successfully!",
 		});
 	});
+});
+
+app.listen(port, () => {
+	console.log(`Adamu's backend server is now running on port ${port}`);
 });
