@@ -10,7 +10,8 @@ const db = new sqlite3.Database("todos.db"); // creates a .db file (persisting d
 const port = 3000;
 
 app.use(express.json()); // middleware to handle & parse JSON data
-app.use(cors()); // middleware to enable CORS for all routes
+app.use(cors());
+app.use(express.static("../frontend/public"));
 
 db.serialize(() => {
 	db.run(
