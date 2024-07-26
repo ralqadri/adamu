@@ -17,3 +17,4 @@ A to-do web application based on Express.js.
 - npm/Node.js
 - Express.js
 - SQLite3
+- CORS
