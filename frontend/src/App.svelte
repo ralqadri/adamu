@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { getTodos } from "./api";
+  import { getTodos, createTodo, updateTodoStatus } from "./api";
 
   let todos = [];
 
@@ -21,7 +21,7 @@
       <div class="item">
           <!-- <div class="item-id">{todo.id}</div> -->
           <div class="item-checkbox">
-            <input type="checkbox" bind:checked={todo.completed}>
+            <input type="checkbox" bind:checked={todo.completed} on:click={() => updateTodoStatus(todo.id)}>
           </div>
           <div class="item-name">
             {todo.name}

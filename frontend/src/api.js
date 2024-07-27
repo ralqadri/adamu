@@ -18,11 +18,10 @@ export async function createTodo(item) {
 	return await response.json();
 }
 
-// TODO: This shit
-// export async function updateTodoStatus(id, completed) {
-// 	const response = await fetch(`${api_url}/completed/${id}`, {
-// 		method: "PATCH",
-// 		headers: { "Content-Type": "application/json" }
-// 		body:
-// 	})
-// }
+export async function updateTodoStatus(id) {
+	const response = await fetch(`${api_url}/completed/${id}`, {
+		method: "PATCH",
+		headers: { "Content-Type": "application/json" },
+	});
+	return await response.json();
+}
