@@ -13,7 +13,7 @@
   <h1>To-do list</h1>
   <ul>
     {#each todos as todo}
-      <li>{todo.name}</li>
+      <li><input type="checkbox" bind:checked={todo.completed}> {todo.name}</li>
     {/each}
   </ul>
 </main>
