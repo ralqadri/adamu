@@ -13,8 +13,10 @@
 
 	--green: #89cc04;
 	--delete-red: #d21041;
+	--text-white: rgba(255, 255, 255, 0.87);
 
 	--container-width: 18em;
+	--text-size: 2em;
 }
 
 /* <ul> reset -- credits: https://gist.github.com/pepebe/1176777 */
@@ -94,15 +96,44 @@ button:focus-visible {
 
 /************** svelte defaults finishes here ********************/
 
+.header {
+	margin-bottom: 2em;
+}
+
+.title {
+	margin-bottom: 3em;
+}
+
+.input {
+	margin-top: 2em;
+	width: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.input input {
+	/* width: 100%; */
+	font-size: var(--text-size);
+	color: var(--text-white);
+	background: transparent;
+	border: 0;
+	border-bottom: 1px solid var(--text-white);
+}
+
+.input-btn {
+	width: 2em;
+	height: 2em;
+}
+
 .list {
 	display: flex;
 }
 
 .list .item {
 	width: var(--container-width);
-
-	font-size: 2em;
-
+	font-size: var(--text-size);
 	display: flex;
 }
 
@@ -150,7 +181,7 @@ button:focus-visible {
 	align-items: center;
 }
 
-.item-delete button {
+button {
 	border: none;
 	padding: none;
 	width: 50%;
@@ -159,12 +190,12 @@ button:focus-visible {
 	background: transparent;
 }
 
-.item-delete button:hover {
+button:hover {
 	border: 1px solid var(--delete-red);
 	border-radius: 100%;
 }
 
-.btn {
+.item-btn {
 	display: flex;
 	align-items: center;
 }

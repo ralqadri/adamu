@@ -16,7 +16,8 @@ A to-do web application based on Express.js.
 
   - [x] FE: Show list of to-do items
   - [x] FE: Handle toggling completed status for each item
-  - [ ] FE: Handle deleting to-do item
+  - [x] FE: Handle adding to-do item
+  - [x] FE: Handle deleting to-do item
   - [ ] FE: Handle renaming to-do item
   - [ ] FE: Proper CSS for to-do list
 
