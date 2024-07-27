@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from "svelte";
+	import { fade } from "svelte/transition";
 	import { getTodos, createTodo, updateTodoStatus, deleteTodo } from "./api";
 
 	let todos = [];
@@ -30,7 +31,6 @@
 
 	function handleEnterKey(event) {
 		if (event.key === "Enter") {
-			console.log(`Enter key pressed! ${new_todo}`);
 			addLocalTodo();
 		}
 	}
@@ -41,8 +41,7 @@
 </script>
 
 <main>
-	<!-- TODO: I think this should just be the textbox to insert new items -->
-	<div class="header">
+	<div class="header" transition:fade>
 		<div class="title">
 			<h1>To-dos</h1>
 		</div>
@@ -57,17 +56,17 @@
 				/>
 			</div>
 			<!-- <div class="input-btn">
-        <button>
-          <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 15 15" {...$$props}><path fill="currentColor" fill-rule="evenodd" d="M8 2.75a.5.5 0 0 0-1 0V7H2.75a.5.5 0 0 0 0 1H7v4.25a.5.5 0 0 0 1 0V8h4.25a.5.5 0 0 0 0-1H8z" clip-rule="evenodd"/></svg>
-        </button>
-      </div> -->
+          <button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 15 15" {...$$props}><path fill="currentColor" fill-rule="evenodd" d="M8 2.75a.5.5 0 0 0-1 0V7H2.75a.5.5 0 0 0 0 1H7v4.25a.5.5 0 0 0 1 0V8h4.25a.5.5 0 0 0 0-1H8z" clip-rule="evenodd"/></svg>
+          </button>
+        </div> -->
 		</div>
 	</div>
 
 	<div class="list">
 		<ul>
 			{#each todos as todo}
-				<div class="item">
+				<div class="item" transition:fade>
 					<!-- <div class="item-id">{todo.id}</div> -->
 					<div class="item-checkbox">
 						<input
@@ -77,6 +76,7 @@
 						/>
 					</div>
 					<div class="item-name">
+						<input type="text" class="item-name" bind:value={todo.name} />
 						{todo.name}
 					</div>
 					<div class="item-delete">

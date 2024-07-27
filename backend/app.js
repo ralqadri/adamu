@@ -79,7 +79,7 @@ app.get("/todos/:id", (req, res) => {
 			return res.status(500).json({ error: err.message }); // return error message if query fails
 		}
 		if (!row) {
-			res.status(404).json({ error: `Todo not found!` });
+			res.status(404).json({ error: `Item ID ${req.params.id} not found!` });
 		}
 		res.status(200).json(row);
 	});
@@ -143,7 +143,7 @@ app.patch("/todos/completed/:id", (req, res) => {
 		}
 
 		if (!row) {
-			return res.status(404).json({ error: err.message });
+			res.status(404).json({ error: `Item ID ${req.params.id} not found!` });
 		}
 
 		// if exists, then finally update the completed status
