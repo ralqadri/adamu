@@ -15,10 +15,10 @@ A to-do web application based on Express.js.
 - [ ] FE (Svelte)
 
   - [x] FE: Show list of to-do items
-  - [ ] FE: Proper CSS for to-do list
-  - [ ] FE: Handle toggling completed status for each item
+  - [x] FE: Handle toggling completed status for each item
   - [ ] FE: Handle deleting to-do item
   - [ ] FE: Handle renaming to-do item
+  - [ ] FE: Proper CSS for to-do list
 
 ## Dependencies
 
