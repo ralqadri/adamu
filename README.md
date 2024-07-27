@@ -10,7 +10,12 @@ A to-do web application based on Express.js.
 - [x] API: Update to-do item (PATCH /todos)
 - [x] API: Delete to-do item (DELETE /todos)
 
-- [ ] Front-end (HTMX or Svelte)
+- [ ] FE (Svelte)
+- [x] FE: Show list of to-do items
+- [ ] FE: Proper CSS for to-do list
+- [ ] FE: Handle toggling completed status for each item
+- [ ] FE: Handle deleting to-do item
+- [ ] FE: Handle renaming to-do item
 
 ## Dependencies
 

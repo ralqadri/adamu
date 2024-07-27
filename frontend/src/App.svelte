@@ -10,14 +10,24 @@
 </script>
 
 <main>
-  <h1>To-do list</h1>
-  <ul>
+  <!-- TODO: I think this should just be the textbox to insert new items -->
+  <div class="title">
+    <h1>To-dos</h1>
+  </div>
+
+  <div class="list">
+    <ul>
     {#each todos as todo}
-      <li><input type="checkbox" bind:checked={todo.completed}> {todo.name}</li>
+      <div class="item">
+          <!-- <div class="item-id">{todo.id}</div> -->
+          <div class="item-checkbox">
+            <input type="checkbox" bind:checked={todo.completed}>
+          </div>
+          <div class="item-name">
+            {todo.name}
+          </div>
+        </div>
     {/each}
-  </ul>
+    </ul>
+  </div>
 </main>
-
-<style>
-
-</style>

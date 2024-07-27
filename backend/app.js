@@ -131,24 +131,37 @@ app.patch("/todos/name/:id", (req, res) => {
 });
 
 // API: (PATCH, /todos/completed/:id) switch/update completed status of a todo item
+// note: idk why i have to do rechecks to the database for this one, but it only works this way
 app.patch("/todos/completed/:id", (req, res) => {
-	const data = req.body;
-	const query = "UPDATE todos SET completed = ? WHERE id = ?";
-	const params = [data.completed ? 1 : 0, req.params.id];
+	const id = req.params.id;
 
-	const updatedItem = {
-		id: req.params.id,
-		completed: data.completed ? 1 : 0,
-	};
-
-	db.run(query, params, (err) => {
+	// making sure if the todo item exists first
+	const query_select = "SELECT * FROM todos WHERE id = ?";
+	db.get(query_select, id, (err, row) => {
 		if (err) {
 			return res.status(500).json({ error: err.message });
 		}
-		res.status(500).json({
-			message: "Todo item completed status switched successfully!",
-			data: updatedItem,
-		});
+
+		if (!row) {
+			return res.status(404).json({ error: err.message });
+		}
+
+		// if exists, then finally update the completed status
+		if (row) {
+			const new_status = row.completed === 0 ? 1 : 0;
+			const query_update = "UPDATE todos SET completed = ? WHERE id = ?";
+			const params = [new_status, id];
+
+			db.run(query_update, params, (err) => {
+				if (err) {
+					return res.status(501).json({ error: err.message });
+				}
+				res.status(200).json({
+					message: "Todo item status switched successfully!",
+					data: { id, completed: new_status },
+				});
+			});
+		}
 	});
 });
 
