@@ -200,11 +200,21 @@ button:hover {
 	align-items: center;
 }
 
-input .item-name {
-	/* width: 100%; */
-	font-size: var(--text-size);
+input.item-name {
+	width: 100%;
+	font-size: 2rem;
 	color: var(--text-white);
 	background: transparent;
 	border: 0;
+}
+
+input.item-name:active,
+input.item-name:focus {
+	border: 0;
 	border-bottom: 1px solid var(--text-white);
+	outline: none;
+}
+
+*:focus {
+	outline: none;
 }

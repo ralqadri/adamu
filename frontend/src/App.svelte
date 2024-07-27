@@ -1,7 +1,13 @@
 <script>
 	import { onMount } from "svelte";
 	import { fade } from "svelte/transition";
-	import { getTodos, createTodo, updateTodoStatus, deleteTodo } from "./api";
+	import {
+		getTodos,
+		createTodo,
+		updateTodoStatus,
+		updateTodoName,
+		deleteTodo,
+	} from "./api";
 
 	let todos = [];
 
@@ -29,9 +35,15 @@
 		}
 	}
 
-	function handleEnterKey(event) {
+	function handleEnterKey(event, activity) {
 		if (event.key === "Enter") {
-			addLocalTodo();
+			if (activity == "add") {
+				addLocalTodo();
+			}
+			if (activity == "update") {
+				// TODO: this
+				updateTodoName();
+			}
 		}
 	}
 
@@ -52,7 +64,7 @@
 					type="text"
 					placeholder="add new todo..."
 					bind:value={new_todo}
-					on:keydown={handleEnterKey}
+					on:keydown={(e) => handleEnterKey(e, "add")}
 				/>
 			</div>
 			<!-- <div class="input-btn">
@@ -76,8 +88,13 @@
 						/>
 					</div>
 					<div class="item-name">
-						<input type="text" class="item-name" bind:value={todo.name} />
-						{todo.name}
+						<input
+							type="text"
+							class="item-name"
+							bind:value={todo.name}
+							on:keydown={(e) => handleEnterKey(e, "update")}
+						/>
+						<!-- {todo.name} -->
 					</div>
 					<div class="item-delete">
 						<button class="item-btn" on:click={() => deleteLocalTodo(todo.id)}>
