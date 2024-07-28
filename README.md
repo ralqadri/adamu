@@ -1,33 +1,71 @@
 # adamu
 
-A to-do web application based on Express.js and Svelte.
+A to-do web application based on Express.js (backend) and Svelte (frontend). <sup>Named after The Bear's character Sydney Adamu!</sup>
 
-## To-dos (lol)
+## Features
 
-- [x] API (Express)
+- Backend API (Express)
 
-  - [x] API: Create to-do item (POST /todos)
-  - [x] API: Get all to-do items (GET /todos)
-  - [x] API: Get specific to-do item (GET /todos)
-  - [x] API: Update to-do item (PATCH /todos)
-  - [x] API: Delete to-do item (DELETE /todos)
+  - Create to-do item (POST /todos)
+  - Get all to-do items (GET /todos)
+  - Get specific to-do item (GET /todos)
+  - Update to-do item (PATCH /todos)
+  - Delete to-do item (DELETE /todos)
 
-- [ ] FE (Svelte)
+- Frontend (Svelte)
 
-  - [x] FE: Show list of to-do items
-  - [x] FE: Handle toggling completed status for each item
-  - [x] FE: Handle adding to-do item
-  - [x] FE: Handle deleting to-do item
-  - [x] FE: Handle renaming to-do item
-  - [x] FE: Strike-through for finished items
-  - [x] FE: Proper CSS for to-do list
-    - [ ] FE: Mobile sizing support/media query
+  - Show list of to-do items
+  - Handle toggling completed status for each item
+  - Handle adding to-do item
+  - Handle deleting to-do item
+  - Handle renaming to-do item
+  - Strike-through for finished items
+  - Proper CSS for to-do list
 
-## Dependencies
+## Set-up
 
-- npm/Node.js
-- Express.js
-- SQLite3
+### Preqrequisites
+
+- Node.js
+- npm
+
+### Installation
+
+0. Assuming you have cloned the repository...
+1. Install dependencies for both backend and frontend.
+
+```sh
+cd adamu/backend
+npm install
+```
+
+```sh
+cd adamu/frontend
+npm install
+```
+
+### Running
+
+0. These next two steps have to be done at the same time - keep both backend and frontend running synchronously
+1. Start the backend server:
+
+```sh
+cd adamu/backend
+node app.js
+```
+
+2. Start the frontend server
+
+```sh
+cd adamu/frontend
+npm run dev
+```
+
+3. Open browser and navigate to the localhost link shown on the shell after starting the frontend server (example: http://localhost:5173/)
+
+## To-do
+
+- [ ] Frontend: Mobile sizing support/media query
 
 ## Credits
 
