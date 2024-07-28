@@ -18,9 +18,10 @@ A to-do web application based on Express.js and Svelte.
   - [x] FE: Handle toggling completed status for each item
   - [x] FE: Handle adding to-do item
   - [x] FE: Handle deleting to-do item
-  - [ ] FE: Handle renaming to-do item
-  - [ ] FE: Strike-through for finished items
-  - [ ] FE: Proper CSS for to-do list
+  - [x] FE: Handle renaming to-do item
+  - [x] FE: Strike-through for finished items
+  - [x] FE: Proper CSS for to-do list
+    - [ ] FE: Mobile sizing support/media query
 
 ## Dependencies
 
