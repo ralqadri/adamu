@@ -2,6 +2,9 @@
 
 A to-do web application based on Express.js (backend) and Svelte (frontend). <sup>Named after The Bear's character Sydney Adamu!</sup>
 
+## Preview
+https://github.com/user-attachments/assets/d6438bc9-39fa-42d4-ab6f-24425a2c23e1
+
 ## Features
 
 - Backend API (Express)
