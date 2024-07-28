@@ -8,9 +8,11 @@ A to-do web application based on Express.js (backend) and Svelte (frontend). <su
 
   - Create to-do item (POST /todos)
   - Get all to-do items (GET /todos)
-  - Get specific to-do item (GET /todos)
-  - Update to-do item (PATCH /todos)
-  - Delete to-do item (DELETE /todos)
+  - Get specific to-do item (GET /todos/:id)
+  - Update to-do item
+    - Update to-do name (PATCH /todos/name/:id)
+    - Switch to-do completed status (PATCH /todos/completed/:id)
+  - Delete to-do item (DELETE /todos/:id)
 
 - Frontend (Svelte)
 
