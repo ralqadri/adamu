@@ -27,3 +27,7 @@ A to-do web application based on Express.js and Svelte.
 - npm/Node.js
 - Express.js
 - SQLite3
+
+## Credits
+
+- [kevmodrome](https://twitter.com/kevmodrome) for his [Notification Toast](https://svelte.dev/repl/2254c3b9b9ba4eeda05d81d2816f6276?version=4.2.18) code

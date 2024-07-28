@@ -1,6 +1,10 @@
 <script>
 	import { onMount } from "svelte";
 	import { fade } from "svelte/transition";
+
+	import { notifications } from "./notifications.js";
+	import Toast from "./Toast.svelte";
+
 	import {
 		getTodos,
 		createTodo,
@@ -9,8 +13,9 @@
 		deleteTodo,
 	} from "./api";
 
-	let todos = [];
+	const NOTIF_TIMER = 1750;
 
+	let todos = [];
 	let new_todo = "";
 
 	async function addLocalTodo() {
@@ -39,11 +44,18 @@
 		if (event.key === "Enter") {
 			if (activity == "add") {
 				addLocalTodo();
+				notifications.success("New to-do added!", NOTIF_TIMER);
 			}
 			if (activity == "update" && id !== undefined && name !== undefined) {
 				updateTodoName(id, name);
+				notifications.warning("To-do name updated!", NOTIF_TIMER);
 			}
 		}
+	}
+
+	function handleDelete(todo) {
+		deleteLocalTodo(todo.id);
+		notifications.danger("To-do deleted!", NOTIF_TIMER);
 	}
 
 	onMount(async () => {
@@ -97,7 +109,7 @@
 						/>
 					</div>
 					<div class="item-delete">
-						<button class="item-btn" on:click={() => deleteLocalTodo(todo.id)}>
+						<button class="item-btn" on:click={() => handleDelete(todo)}>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="1.5em"
@@ -118,3 +130,4 @@
 		</ul>
 	</div>
 </main>
+<Toast />
