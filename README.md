@@ -1,6 +1,6 @@
 # adamu
 
-A to-do web application based on Express.js.
+A to-do web application based on Express.js and Svelte.
 
 ## To-dos (lol)
 
@@ -19,6 +19,7 @@ A to-do web application based on Express.js.
   - [x] FE: Handle adding to-do item
   - [x] FE: Handle deleting to-do item
   - [ ] FE: Handle renaming to-do item
+  - [ ] FE: Strike-through for finished items
   - [ ] FE: Proper CSS for to-do list
 
 ## Dependencies

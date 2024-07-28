@@ -35,14 +35,13 @@
 		}
 	}
 
-	function handleEnterKey(event, activity) {
+	function handleEnterKey(event, activity, id = undefined, name = undefined) {
 		if (event.key === "Enter") {
 			if (activity == "add") {
 				addLocalTodo();
 			}
-			if (activity == "update") {
-				// TODO: this
-				updateTodoName();
+			if (activity == "update" && id !== undefined && name !== undefined) {
+				updateTodoName(id, name);
 			}
 		}
 	}
@@ -91,10 +90,11 @@
 						<input
 							type="text"
 							class="item-name"
+							class:item-done={todo.completed}
 							bind:value={todo.name}
-							on:keydown={(e) => handleEnterKey(e, "update")}
+							on:keydown={(e) =>
+								handleEnterKey(e, "update", todo.id, todo.name)}
 						/>
-						<!-- {todo.name} -->
 					</div>
 					<div class="item-delete">
 						<button class="item-btn" on:click={() => deleteLocalTodo(todo.id)}>

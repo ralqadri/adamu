@@ -26,8 +26,16 @@ export async function updateTodoStatus(id) {
 	return await response.json();
 }
 
-export async function updateTodoName(id) {
+export async function updateTodoName(id, name) {
 	// TODO: this
+	const response = await fetch(`${api_url}/name/${id}`, {
+		method: "PATCH",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({
+			name: name,
+		}),
+	});
+	return await response.json();
 }
 
 export async function deleteTodo(id) {
